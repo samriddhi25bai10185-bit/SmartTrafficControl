@@ -1,153 +1,180 @@
-# 🚦 Smart Traffic Control System
+# Smart Traffic Control System
 
-A Java-based Command Line Interface (CLI) application that simulates a smart traffic management system for multiple junctions. The system monitors traffic density, manages different types of vehicles, detects congestion, provides emergency vehicle priority, suggests alternative routes, and generates traffic reports.
+A Java-based Command Line Interface (CLI) application that simulates a smart traffic management system for multiple junctions. It monitors traffic density, manages vehicles, handles emergency priority, detects congestion, suggests alternative routes, and generates traffic reports.
 
----
+## Features
 
-## 📌 Project Overview
-
-The **Smart Traffic Control System** is designed to simulate the basic working of a centralized traffic control system.
-
-The application manages:
-
-- Multiple traffic junctions
-- Multiple roads
-- Different types of vehicles
-- Traffic signal control
+- Control Room dashboard for monitoring junctions
+- Multiple junctions and roads
+- Car, Bike, Bus and Emergency Vehicle management
+- Smart signal timing based on traffic density
 - Emergency vehicle priority
-- Traffic congestion
-- Road blockages
-- Alternative route suggestions
-- Traffic statistics
+- Traffic congestion detection
+- Road blockage and reopening
+- Alternative route suggestion
+- Traffic statistics and report generation
 - Multithreaded traffic simulation
+- Synchronization and custom exception handling
+- File I/O for traffic reports
 
-The project is completely **CLI-based** and can be executed from the command line.
+## Technologies Used
 
----
+- Java
+- Object-Oriented Programming (OOP)
+- Collections Framework
+- Multithreading
+- Synchronization
+- Exception Handling
+- File I/O
+- CLI
 
-## ✨ Key Features
+## Project Structure
 
-### 🖥️ 1. Control Room
+```text
+SmartTrafficControl/
+│
+├── src/
+│   ├── controller/
+│   ├── exception/
+│   ├── model/
+│   ├── service/
+│   ├── simulation/
+│   └── Main.java
+│
+├── README.md
+└── traffic_report.txt
+```
 
-Provides a centralized monitoring dashboard for all junctions.
+## Traffic Signal Logic
 
-It displays:
+Signal timing is calculated according to traffic density:
 
-- Junction status
-- Traffic signal status
-- Green signal timing
-- Total vehicles
-- Emergency vehicle presence
-- Overall traffic condition
-- Road-wise traffic status
-
----
-
-### 🚗 2. Vehicle Management
-
-The system supports different vehicle types:
-
-- Car
-- Bike
-- Bus
-- Emergency Vehicle
-
-Users can:
-
-- Add vehicles
-- View vehicles
-- Remove vehicles when they exit the road
-
-Each vehicle has its own ID, type, speed, and emergency status.
-
----
-
-### 🛣️ 3. Road & Traffic Management
-
-Each road has:
-
-- Road ID
-- Road name
-- Maximum capacity
-- Current vehicle count
-- Open/closed status
-
-The system calculates road occupancy and classifies traffic as:
-
-- LOW TRAFFIC
-- MODERATE TRAFFIC
-- HIGH TRAFFIC
-- ROAD CLOSED
-
----
-
-### 🚨 4. Emergency Vehicle Priority
-
-Emergency vehicles receive the highest priority.
-
-When an emergency vehicle is detected:
-
-1. The system identifies the emergency vehicle.
-2. Its current road is displayed.
-3. The traffic signal is changed to GREEN.
-4. Emergency priority is granted.
-
-This simulates priority movement for ambulances and other emergency services.
-
----
-
-### 🚦 5. Smart Signal Timing
-
-Signal timing is calculated according to the current traffic density.
-
-| Traffic Condition | Green Time |
-|-------------------|------------|
-| Low Traffic | 20 seconds |
-| Moderate Traffic | 40 seconds |
-| High Traffic | 60 seconds |
+| Traffic Level | Green Time |
+|---|---:|
+| Low | 20 seconds |
+| Moderate | 40 seconds |
+| High | 60 seconds |
 | Emergency Vehicle | 60 seconds + Priority |
 
-The system also changes the signal state according to traffic conditions.
+Road traffic is classified using occupancy:
 
----
+- Below 50% → Low Traffic
+- 50%–79% → Moderate Traffic
+- 80% or above → High Traffic
+- Closed Road → Road Closed
 
-### 💡 6. Alternative Route Suggestion
+## Emergency Vehicle Priority
 
-When a road is highly congested or closed, the system searches for another available road.
+When an emergency vehicle is detected, the system:
 
-It considers:
+1. Identifies the emergency vehicle.
+2. Detects its road.
+3. Changes the signal to GREEN.
+4. Grants emergency priority.
 
-- Road availability
-- Available capacity
-- Current traffic occupancy
+## Alternative Route
 
-The road with lower traffic and available capacity is suggested as an alternative route.
+If a road is highly congested or closed, the system checks other open roads and suggests an available road with lower traffic and sufficient capacity.
 
----
+## Multithreading
 
-### ⚠️ 7. Incident & Alerts
+The Live Simulation module runs multiple junction simulations concurrently using Java threads and the `Runnable` interface.
 
-The system can detect traffic-related conditions such as:
+## Reports
 
-- Emergency vehicles
-- High traffic
-- Road blockage
-- Closed roads
-- Lack of alternative routes
-
----
-
-### 📊 8. Analytics & Reports
-
-The system generates traffic statistics including:
-
-- Road-wise vehicle count
-- Total vehicles
-- Vehicle type statistics
-- Emergency vehicle count
-- Junction information
-
-Reports are automatically stored in:
+Traffic statistics can be generated and saved to:
 
 ```text
 traffic_report.txt
+```
+
+The report contains junction information, road-wise vehicle count, vehicle type statistics, total vehicles and emergency vehicle count.
+
+## Requirements
+
+- Java JDK 26 or compatible version
+- Git
+- Command Prompt / PowerShell / Terminal
+- IntelliJ IDEA (optional)
+
+Check Java installation:
+
+```bash
+java -version
+javac -version
+```
+
+## How to Run
+
+### 1. Clone the Repository
+
+```bash
+git clone https://github.com/samriddhi25bai10185-bit/SmartTrafficControl.git
+```
+
+### 2. Open the Project
+
+```bash
+cd SmartTrafficControl
+```
+
+### 3. Compile
+
+For Windows:
+
+```bash
+javac -d out src\model\*.java src\controller\*.java src\service\*.java src\simulation\*.java src\exception\*.java src\Main.java
+```
+
+### 4. Run
+
+```bash
+java -cp out Main
+```
+
+## Main Menu
+
+```text
+1. Control Room
+2. Vehicle Management
+3. Road & Traffic Status
+4. Incident & Alerts
+5. Analytics & Reports
+6. Live Simulation
+X. Exit
+```
+
+## Java Concepts Demonstrated
+
+- Classes and Objects
+- Encapsulation
+- Abstraction
+- Inheritance
+- Polymorphism
+- Method Overriding
+- ArrayList and HashMap
+- Exception Handling
+- File Handling
+- Multithreading
+- Synchronization
+
+## Future Enhancements
+
+- GUI-based interface
+- Database integration
+- Real-time traffic sensors
+- GPS-based route optimization
+- AI-based traffic prediction
+- Real-time map visualization
+
+## Author
+
+**Samriddhi Kesarwani**
+
+GitHub: https://github.com/samriddhi25bai10185-bit
+
+## Project Type
+
+Academic Java Project  
+**Application:** Smart Traffic Management  
+**Interface:** Command Line Interface (CLI)
